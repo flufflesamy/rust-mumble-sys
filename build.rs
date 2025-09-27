@@ -1,5 +1,3 @@
-#![feature(nll)]
-
 #[macro_use]
 extern crate const_format;
 extern crate bindgen;
@@ -123,7 +121,7 @@ fn main() {
     //     out_file
     // };
 
-    let should_build = !out_file.exists() || true; //TODO: Remove || true
+    let should_build = !out_file.exists(); //TODO: Remove || true
     if should_build {
         let mumble_sources_symlink = env::current_dir().unwrap().join("mumble_sources");
         let mumble_home = if mumble_sources_symlink.exists() {

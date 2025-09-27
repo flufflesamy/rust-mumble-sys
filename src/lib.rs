@@ -1,8 +1,6 @@
-#![feature(const_fn)]
-#![feature(const_btree_new)]
-#![feature(nll)]
-#![feature(option_expect_none)]
+#![feature(const_btree_len)]
 #![allow(dead_code)]
+#![allow(clippy::not_unsafe_ptr_arg_deref)]
 
 use parking_lot::Mutex;
 use std::ffi::{CStr, CString};
@@ -594,10 +592,7 @@ fn register_resource<
         let mut map = RESOURCES.lock();
         map.insert(SendConstPointer::new(ptr), item)
     }
-    .expect_none(&format!(
-        "Item with pointer {:?} already present in map",
-        &ptr
-    ));
+    .expect("Item with pointer {:?} already present in map");
     ptr
 }
 fn release_resource(
